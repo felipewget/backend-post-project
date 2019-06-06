@@ -1,0 +1,4 @@
+- My english is improving everyday, all write english was writed without translator, ok?
+- This project no have folders how public, assets, view and another folder because is just back-end
+- I will make do i18n in last
+- This back-end api is clusterized, It replique if is needed and have a loadbalancer, need Redis

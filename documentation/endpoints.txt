@@ -1,0 +1,64 @@
+This archive discribe a bit about endpoints
+
+- Endpoints
+
+Check if user stay authenticated
+GET		/authenticate 
+
+List posts
+GET  	/posts
+
+List categorys
+GET 	/categorys
+
+Auth User
+POST	/authenticate
+
+Create a new user
+POST	/register
+
+Create a new post
+POST 	/post/create
+
+Edit the publication
+PUT 	/post/:post_id/edit
+
+Remove a publication
+DELETE 	/post
+
+Aplication`s logout
+DELETE 	/loggout
+
+
+- Endpoints Reponses
+
+GET
+{
+	success		: Bool,
+	metadata	: Obj
+}
+
+POST
+{
+	success		: Bool,
+	metadata	: Obj
+}
+
+PUT
+{
+	success		: Bool,
+	metadata	: [Obj]
+}
+
+DELETE
+{
+	success		: Bool
+}
+
+ERRORS
+{
+	success		: Bool	False
+	error		: String
+	cod			: Int
+	metadata	: [Obj]
+}
