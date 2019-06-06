@@ -1,7 +1,7 @@
 {
-  "name": "socialnetwork",
+  "name": "project_post",
   "version": "1.0.0",
-  "description": "This is a example of MVC in Node.",
+  "description": "This is a post aplication.",
   "main": "app.js",
   "scripts": {
     "run": "node app",
