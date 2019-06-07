@@ -2,3 +2,11 @@
 - This project no have folders how public, assets, view and another folder because is just back-end
 - I will make do i18n in last
 - This back-end api is clusterized, It replique if is needed and have a loadbalancer, need Redis
+- I Could use GraphQL for Mongo
+- Ah! I choosen Mongo ok? I not will use ORM than is used main in relational SGBD
+- I can use transactions on querys... 
+- If I have alot of time after minimum viable product, I will use Websocket to be real time
+- I will do the uploads in publics/uploads path, in this webserver but I prefer in real application use external server to only media and upload
+and use a server to front, a to back-end clusterized and a server to medias and uploads
+- I will make softdelete because all information is important
+- I will be a limit per hour of upload and publications, to evit DDOS

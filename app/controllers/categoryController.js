@@ -1,3 +1,7 @@
+
+var authService = require("./../services/authService.js");
+var categoryService = require("./../services/categoryService.js");
+
 var categoryController = function() {} // categoryController constructor
 
 categoryController.prototype.listCategorys = async function(req, res, app) {

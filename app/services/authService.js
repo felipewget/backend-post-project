@@ -1,29 +1,168 @@
-var authService = function() {} // authService constructor
 
-authService.prototype.authenticate = async function(req, res, app) {
+var conn 		= require("./../../../config/dbConnect");
+var authService = function(){}
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+authService.prototype.authenticate = async function( login, password, app ) {
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+	try {
 
-	var response = { ola: 1 } // await authService.authenticate( login, password, app );
+		let self = this;
 
-	res.send( response );
-	res.end();
+		return new Promise((success, reject) => {
+
+			var usersDAO 		= new app.app.models.usersDAO( conn );
+
+			usersDAO.authenticate( login, password ).then(function( response ){
+				return success( response );
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
 
 }
 
-authService.prototype.isAuthenticated = async function(req, res, app) {
+authService.prototype.createToken = async function( user_id, app ) {
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+	try {
 
-	// var token = req.query.token;
+		let self = this;
 
-	var response = { ola: 1 } // await authService.isAuthenticated( token, app );
+		return new Promise((success, reject) => {
 
-	res.send(response);
-	res.end();
+			var usersSessionsDAO 	= new app.app.models.usersSessionsDAO( conn );
+			var tokensUtil 			= new app.app.utils.tokensUtil;
+
+			tokensUtil.createAccessToken( user_id ).then( function( access_token ){
+
+				return usersSessionsDAO.createToken( user_id, access_token );
+
+			}).then( function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
+
+}
+
+authService.prototype.isAuthenticated = async function( token, app) {
+
+	try {
+
+		let self = this;
+
+		return new Promise((success, reject) => {
+
+			var usersDAO 			= new app.app.models.usersDAO( conn );
+			var usersSessionsDAO 	= new app.app.models.usersSessionsDAO( conn );
+			var tokensUtil 			= new app.app.utils.tokensUtil;
+
+			tokensUtil.getSessionToken( token ).then( function( token_response ){
+
+				if( token_response.success && token_response.metadata && token_response.metadata.authenticated === true ){
+
+					let user_id = token_response.metadata.user_id;
+
+					usersDAO.getUserById( user_id ).then( function( response ){
+						
+						return success( token_response.metadata.user = response.metadata );
+
+					});
+
+				} else {
+					return success( token_response );
+				}
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
+
+}
+
+authService.prototype.register = async function( user_id, app ) {
+
+	try {
+
+		let self = this;
+
+		return new Promise((success, reject) => {
+
+			var usersSessionsDAO 	= new app.app.models.usersSessionsDAO( conn );
+			var tokensUtil 			= new app.app.utils.tokensUtil;
+
+			tokensUtil.removeAccessTokenById( user_id ).then( function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
+
+}
+
+authService.prototype.logout = async function( user_id, app ) {
+
+	try {
+
+		let self = this;
+
+		return new Promise((success, reject) => {
+
+			var usersSessionsDAO 	= new app.app.models.usersSessionsDAO( conn );
+			var tokensUtil 			= new app.app.utils.tokensUtil;
+
+			tokensUtil.removeAccessTokenById( user_id ).then( function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
 
 }
 

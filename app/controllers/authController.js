@@ -27,9 +27,25 @@ authController.prototype.isAuthenticated = async function(req, res, app) {
 
 authController.prototype.register = async function(req, res, app) {
 
-	var { name, login, password } = req.query;
+	let authService = ( new authService() );
 
-	var response = await ( new authService() ).register( name, login, password );
+	var { name, login, password } = req.query;
+	var response = {};
+
+	var response = await authService.checkIfEmailExist( name, login, password );
+	if( response.metadata && response.metadata.user_id ){
+
+		response = {
+			success: false,
+			message: "Email ja cadastrado"
+		}
+
+	} else {
+
+		await authService.createUser( name, login, password );	
+		response = await authService.authenticate( login, password, app );
+
+	}
 
 	res.send( response );
 	res.end();
@@ -40,7 +56,7 @@ authController.prototype.logout = async function(req, res, app) {
 
 	var { token } = req.query;
 
-	var response = await ( new authService() ).removeCoockieSession( token );
+	var response = await ( new authService() ).logout( token );
 
 	res.send(response);
 	res.end();

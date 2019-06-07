@@ -1,29 +1,120 @@
+
+var conn 		= require("./../../../config/dbConnect");
 var postService = function() {} // postService constructor
 
-postService.prototype.authenticate = async function(req, res, app) {
+postService.prototype.list = async function( page = 1, categorys, app) {
 
-	// var postService = new ( require("./../../services/platform/postService.js") )();
+	try {
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+		let self = this;
 
-	var response = { ola: 1 } // await postService.authenticate( login, password, app );
+		return new Promise((success, reject) => {
 
-	res.send( response );
-	res.end();
+			var postsDAO 	= new app.app.models.postsDAO( conn );
+
+			postsDAO.list( page, categorys ).then(function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
 
 }
 
-postService.prototype.isAuthenticated = async function(req, res, app) {
+postService.prototype.save = async function( obj_post, app) {
 
-	// var postService = new ( require("./../../services/platform/postService.js") )();
+	try {
 
-	// var token = req.query.token;
+		let self = this;
 
-	var response = { ola: 1 } // await postService.isAuthenticated( token, app );
+		return new Promise((success, reject) => {
 
-	res.send(response);
-	res.end();
+			var postsDAO 	= new app.app.models.postsDAO( conn );
+
+			postsDAO.save( obj_post ).then(function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
+
+}
+
+postService.prototype.update = async function( obj_post, id, app) {
+
+	try {
+
+		let self = this;
+
+		return new Promise((success, reject) => {
+
+			var postsDAO 	= new app.app.models.postsDAO( conn );
+
+			postsDAO.update( obj_post, id ).then(function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
+
+}
+
+postService.prototype.removePost = async function( id, app) {
+
+	try {
+
+		let self = this;
+
+		return new Promise((success, reject) => {
+
+			var postsDAO 	= new app.app.models.postsDAO( conn );
+
+			postsDAO.removePost( id ).then(function( response ){
+
+				return success( response );
+
+			});
+
+		});
+
+	} catch( e ){
+
+		return success({
+			success	: false
+			error	: e.message
+		});
+
+	}
 
 }
 

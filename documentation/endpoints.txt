@@ -11,6 +11,12 @@ GET  	/posts
 List categorys
 GET 	/categorys
 
+Get Midia
+GET 	/media/:media_id
+
+Post Midia
+GET 	/media/upload
+
 Auth User
 POST	/authenticate
 

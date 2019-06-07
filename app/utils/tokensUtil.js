@@ -1,6 +1,6 @@
 var tokensUtil = function() {} // tokensUtil constructor
 
-tokensUtil.prototype.createAccessToken = function( login ) {
+tokensUtil.prototype.createAccessToken = function( user_id ) {
 
 	var sha1 = require('sha1');
 	var response = {
