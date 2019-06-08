@@ -1,8 +1,5 @@
-var namesUtil = function() {} // namesUtil constructor
-
-namesUtil.prototype.formatName = function( name ) {
-
-	var name;
+exports.formatName = async function( name ) {
+	
 	response = {
 		cod: 200
 	}
@@ -50,8 +47,4 @@ namesUtil.prototype.formatName = function( name ) {
 
 	}
 	
-}
-
-module.exports = function(){
-	return namesUtil;
 }

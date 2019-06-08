@@ -1,18 +1,16 @@
-var tokensUtil = function() {} // tokensUtil constructor
-
-tokensUtil.prototype.createAccessToken = function( user_id ) {
-
-	var sha1 = require('sha1');
-	var response = {
-		cod: 200,
-		token: null,
-	};
+exports.createAccessToken = function( user_id ) {
 
 	try {
 
+		var sha1 = require('sha1');
+		var response = {
+			cod: 200,
+			token: null,
+		};
+
 		return new Promise((sucess, reject) => {
 
-			response.token = sha1( Date.now() + "_" + login + "") // @todo, fazer
+			response.token = sha1( Date.now() + "_" + user_id + "") // @todo, fazer
 			return sucess( response );
 
 		});
@@ -30,7 +28,7 @@ tokensUtil.prototype.createAccessToken = function( user_id ) {
 	
 }
 
-tokensUtil.prototype.createDeaultTokenLink = function( login ) {
+exports.createDeaultTokenLink = function( login ) {
 
 	var sha1 = require('sha1');
 	var response = {
@@ -61,7 +59,7 @@ tokensUtil.prototype.createDeaultTokenLink = function( login ) {
 }
 
 // @TODO
-tokensUtil.prototype.createUserPasswordToken = function( password ) {
+exports.createUserPasswordToken = function( password ) {
 
 	var response = {
 		cod: 200,
@@ -88,8 +86,4 @@ tokensUtil.prototype.createUserPasswordToken = function( password ) {
 
 	}
 
-}
-
-module.exports = function(){
-	return tokensUtil;
 }

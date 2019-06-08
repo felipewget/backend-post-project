@@ -1,5 +1,5 @@
 
-var conn 		= require("./../../../config/dbConnect");
+var conn 		= require("./../../config/dbConnect");
 var postService = function() {} // postService constructor
 
 postService.prototype.list = async function( page = 1, categorys, app) {
@@ -23,7 +23,7 @@ postService.prototype.list = async function( page = 1, categorys, app) {
 	} catch( e ){
 
 		return success({
-			success	: false
+			success	: false,
 			error	: e.message
 		});
 
@@ -52,7 +52,7 @@ postService.prototype.save = async function( obj_post, app) {
 	} catch( e ){
 
 		return success({
-			success	: false
+			success	: false,
 			error	: e.message
 		});
 
@@ -81,7 +81,7 @@ postService.prototype.update = async function( obj_post, id, app) {
 	} catch( e ){
 
 		return success({
-			success	: false
+			success	: false,
 			error	: e.message
 		});
 
@@ -110,7 +110,7 @@ postService.prototype.removePost = async function( id, app) {
 	} catch( e ){
 
 		return success({
-			success	: false
+			success	: false,
 			error	: e.message
 		});
 

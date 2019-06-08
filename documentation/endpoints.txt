@@ -33,7 +33,7 @@ Remove a publication
 DELETE 	/post
 
 Aplication`s logout
-DELETE 	/loggout
+DELETE 	/logout
 
 
 - Endpoints Reponses

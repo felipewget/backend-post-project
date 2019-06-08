@@ -10,3 +10,4 @@
 and use a server to front, a to back-end clusterized and a server to medias and uploads
 - I will make softdelete because all information is important
 - I will be a limit per hour of upload and publications, to evit DDOS
+- Its used tokens for login, this allow logout on only machine or remove all tokens, making logout on all machine and check machine's history by token
