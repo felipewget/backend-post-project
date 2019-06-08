@@ -1,17 +1,35 @@
 
-var authService = require("./../services/authService.js");
-var categoryService = require("./../services/categoryService.js");
 
-var categoryController = function() {} // categoryController constructor
+
+var categoryController = function(){
+
+	this.categoryService = require("./../services/categoryService.js");
+	this.authService 	 = require("./../services/authService.js");
+
+}
 
 categoryController.prototype.listCategorys = async function(req, res, app) {
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+	let self = this;
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+	let authService 	= ( new self.authService() );
+	let categoryService = ( new self.categoryService() );
 
-	var response = { ola: 1 } // await authService.authenticate( login, password, app );
+	var { token } = req.query;
+	var response = {};
+
+	var obj_auth = await authService.isAuthenticated( token, app );
+
+	if( !obj_auth.authenticated ){
+
+		response.success = false;
+		response.authenticated = false;
+
+	} else {
+
+		response = await categoryService.listAvaliableCategorys( app );
+
+	}
 
 	res.send( response );
 	res.end();

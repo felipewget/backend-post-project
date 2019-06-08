@@ -1,7 +1,8 @@
 var postController = function() {
 
-	this.postService = require("./../services/postService.js");
-	this.authService = require("./../services/authService.js");
+	this.postService 		= require("./../services/postService.js");
+	this.authService 		= require("./../services/authService.js");
+	this.categoryService 	= require("./../services/categoryService.js");
 
 }
 
@@ -45,10 +46,12 @@ postController.prototype.create = async function(req, res, app) {
 	let self = this;
 
 	var { text, medias, categorys, token } = req.query;
+	
 	var response 				= {};
 
-	let authService = ( new self.authService() );
-	let postService = ( new self.postService() );
+	let authService 	= ( new self.authService() );
+	let postService 	= ( new self.postService() );
+	let categoryService = ( new self.categoryService() );
 
 	var obj_auth = await authService.isAuthenticated( token, app );
 
@@ -59,10 +62,14 @@ postController.prototype.create = async function(req, res, app) {
 
 	} else {
 
-		let user_id = obj_auth.metadata._id;
+		let user_id 	= obj_auth.metadata._id;
+
+		let categorys_ids 	= categorys
+							? await categoryService.processCategorysPost( categorys, app )
+							: [] ;
 
 		// Adicionar os IDS das categorias
-		response = await postService.createPost( text, medias, [], user_id, app );
+		response = await postService.createPost( text, medias, categorys_ids, user_id, app );
 
 	}
 

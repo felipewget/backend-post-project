@@ -36,4 +36,5 @@ but to methods and functions my keys close in next line... ex:
 	{
 
 	}
-
+- This application will list junt categorys that is linked in one post... If not stay in one post, no list
+- I can put "app" valiable when calling Service and not in all methods... is better...
