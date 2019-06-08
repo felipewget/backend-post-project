@@ -14,17 +14,4 @@ categoryService.prototype.authenticate = async function(req, res, app) {
 
 }
 
-categoryService.prototype.isAuthenticated = async function(req, res, app) {
-
-	// var categoryService = new ( require("./../../services/platform/categoryService.js") )();
-
-	// var token = req.query.token;
-
-	var response = { ola: 1 } // await categoryService.isAuthenticated( token, app );
-
-	res.send(response);
-	res.end();
-
-}
-
 module.exports = categoryService;

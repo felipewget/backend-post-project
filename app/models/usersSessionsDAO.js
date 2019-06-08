@@ -4,10 +4,11 @@
  * @author Fe Oliveira
  * @collection_structure
  	{
-		_id: 		ObjectId(),	// Objeto Id do proprio MongoDB para indexacao
-		user_id: 	ObjectId(),	// Id do usuario da collection Users
-		token: 		HashString, // Token de autenticacao
-		created: 	Timestamp,	// Quando a sessao criada 
+		_id: 		ObjectId(),		// Objeto Id do proprio MongoDB para indexacao
+		user_id: 	ObjectId(),		// Id do usuario da collection Users
+		token: 		HashString, 	// Token de autenticacao
+		created: 	Timestamp,	 	// Quando a sessao criada 
+		deleted:    Timestamp|null	// Soft-delete
  	}
  */
 

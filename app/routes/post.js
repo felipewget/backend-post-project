@@ -21,7 +21,7 @@ module.exports = function( app ){
 	 *	}
 	 */
 	app.get( '/posts' , function( req, res ){
-		( new postController() ).listPosts( req, res, app );
+		( new postController() ).list( req, res, app );
 	});
 
 	/**
@@ -35,7 +35,7 @@ module.exports = function( app ){
 	 *	}
 	 */
 	app.post( '/post/create' , function( req, res ){
-		( new postController() ).createPost( req, res, app );
+		( new postController() ).create( req, res, app );
 	});
 
 	/**
@@ -48,7 +48,7 @@ module.exports = function( app ){
 	 *		metadata	: Obj
 	 *	}
 	 */
-	app.post( '/post/:post_id/edit' , function( req, res ){
+	app.put( '/post/:post_id/edit' , function( req, res ){
 		( new postController() ).updatePost( req, res, app );
 	});
 
@@ -61,7 +61,7 @@ module.exports = function( app ){
 	 *	}
 	 */
 	app.delete( '/post' , function( req, res ){
-		( new postController() ).deletePost( req, res, app );
+		( new postController() ).removePost( req, res, app );
 	});
 
 }

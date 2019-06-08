@@ -1,8 +1,9 @@
+var postController = function() {
 
-var authService = require("./../services/authService.js");
-var postService = require("./../services/postService.js");
+	this.postService = require("./../services/postService.js");
+	this.authService = require("./../services/authService.js");
 
-var postController = function() {}
+}
 
 postController.prototype.listPosts = async function(req, res, app) {
 
@@ -39,14 +40,31 @@ postController.prototype.listPosts = async function(req, res, app) {
 
 }
 
-postController.prototype.createPost = async function(req, res, app) {
+postController.prototype.create = async function(req, res, app) {
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+	let self = this;
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+	var { text, medias, categorys, token } = req.query;
+	var response 				= {};
 
-	var response = { ola: 1 } // await authService.authenticate( login, password, app );
+	let authService = ( new self.authService() );
+	let postService = ( new self.postService() );
+
+	var obj_auth = await authService.isAuthenticated( token, app );
+
+	if( !obj_auth.authenticated ){
+
+		response.success = false;
+		response.authenticated = false;
+
+	} else {
+
+		let user_id = obj_auth.metadata._id;
+
+		// Adicionar os IDS das categorias
+		response = await postService.createPost( text, medias, [], user_id, app );
+
+	}
 
 	res.send( response );
 	res.end();
@@ -55,26 +73,78 @@ postController.prototype.createPost = async function(req, res, app) {
 
 postController.prototype.updatePost = async function(req, res, app) {
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+	let self = this;
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+	var { text, medias, categorys, token } 	= req.query;
+	var { post_id }							= req.params;
+	var response 				= {};
 
-	var response = { ola: 1 } // await authService.authenticate( login, password, app );
+	let authService = ( new self.authService() );
+	let postService = ( new self.postService() );
+
+	var obj_auth = await authService.isAuthenticated( token, app );
+
+	if( !obj_auth.authenticated ){
+
+		response.success = false;
+		response.authenticated = false;
+
+	} else {
+
+		let user_id = obj_auth.metadata._id;
+
+		// Adicionar os IDS das categorias
+		response = await postService.updatePost( text, medias, [], user_id, post_id, app );
+
+		if( response.success ){
+
+			let post = await postService.getPostById( post_id, app );
+			
+			if( post.metadata && post.metadata._id ){
+
+				response.metadata = post.metadata;
+
+			}
+
+		}
+
+	}
 
 	res.send( response );
 	res.end();
 
 }
 
-postController.prototype.deletePost = async function(req, res, app) {
+postController.prototype.removePost = async function(req, res, app) {
 
-	// var authService = new ( require("./../../services/platform/authService.js") )();
+	let self = this;
 
-	// var login = req.query.login;
-	// var password = req.query.password;
+	var { post_id, token } = req.query;
+	var response 				= {};
 
-	var response = { ola: 1 } // await authService.authenticate( login, password, app );
+	let authService = ( new self.authService() );
+	let postService = ( new self.postService() );
+
+	var obj_auth = await authService.isAuthenticated( token, app );
+
+	if( !obj_auth.authenticated ){
+
+		response.success = false;
+		response.authenticated = false;
+
+	} else {
+
+		let user_id = obj_auth.metadata._id;
+
+		// Adicionar os IDS das categorias
+		response = await postService.removePost( post_id, user_id, app );
+
+		response.success = true;
+		response.metadata = {
+			post_id: post_id
+		};
+
+	}
 
 	res.send( response );
 	res.end();

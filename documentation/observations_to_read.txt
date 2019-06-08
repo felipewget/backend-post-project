@@ -1,3 +1,5 @@
+Some thinks while I`m programming this application ( =
+
 - My english is improving everyday, all write english was writed without translator, ok?
 - This project no have folders how public, assets, view and another folder because is just back-end
 - I will make do i18n in last
@@ -11,3 +13,27 @@ and use a server to front, a to back-end clusterized and a server to medias and 
 - I will make softdelete because all information is important
 - I will be a limit per hour of upload and publications, to evit DDOS
 - Its used tokens for login, this allow logout on only machine or remove all tokens, making logout on all machine and check machine's history by token
+- In some code you can think that there is more variable thar is need... I create a variable for simplify code to another people... When work in team, I code for me and to team
+- Ah! I forget of talk... I USE SNACK_CASE IN VARIABLES ON THIS PROJECT, CAMMEL CASE ON FUNCTIONS AND METHODS... but is only my preference for Node, in PHP I use CammelCase to all in Default
+- I think about why no used ORM in this project... find(), findOne(), one(), all() is great hahahah
+- I have a custom: to for(), if() etc... my keys open a close in line ex: 
+	if(){
+
+	} else {
+
+	}
+
+	for( var i in arr ){
+		
+	}
+but to methods and functions my keys close in next line... ex:
+	function helloWork()
+	{
+		
+	}
+
+	Class heyHowLetsGo()
+	{
+
+	}
+
