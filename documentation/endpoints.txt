@@ -12,7 +12,7 @@ List categorys
 GET 	/categorys
 
 Get Midia
-GET 	/media/:media_id
+GET 	/media/post/list
 
 Post Midia
 GET 	/media/upload

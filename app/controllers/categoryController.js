@@ -1,6 +1,4 @@
 
-
-
 var categoryController = function(){
 
 	this.categoryService = require("./../services/categoryService.js");

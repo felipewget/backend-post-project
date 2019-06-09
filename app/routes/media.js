@@ -20,8 +20,8 @@ module.exports = function( app ){
 	 *		metadata	: Obj
 	 *	}
 	 */
-	app.get( '/media/:media_id' , function( req, res ){
-		( new mediaController ).getMedia( req, res, app );
+	app.get( '/media/post/list' , function( req, res ){
+		( new mediaController ).getMediaById( req, res, app );
 	});
 
 	/**
@@ -35,7 +35,21 @@ module.exports = function( app ){
 	 *	}
 	 */
 	app.post( '/media/upload' , function( req, res ){
-		( new mediaController ).upload( req, res, app );
+		( new mediaController ).uploadMedia( req, res, app );
+	});
+
+	/**
+	 * 	Remove Medias
+	 *
+	 * 	@TODO describe params
+	 *
+	 * 	@return array {
+	 *		success		: Bool,
+	 *		metadata	: Obj
+	 *	}
+	 */
+	app.delete( '/media' , function( req, res ){
+		( new mediaController ).removeMedia( req, res, app );
 	});
 
 }
