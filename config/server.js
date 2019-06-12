@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*', // CORS, vou liberar pra todos mas pra restringir, basta suvtituir por: http://localhost:4200
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 

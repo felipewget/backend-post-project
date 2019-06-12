@@ -10,7 +10,7 @@ authController.prototype.authenticate = async function(req, res, app) {
 	let self = this;
 	let authService = ( new self.authService() );
 
-	var { login, password } = req.query;
+	var { login, password } = req.body;
 
 	var response = await authService.authenticate( login, password, app );
 
@@ -46,7 +46,7 @@ authController.prototype.register = async function(req, res, app) {
 	let self = this;
 	let authService = ( new self.authService() );
 
-	var { name, login, password } = req.query;
+	var { name, login, password } = req.body;
 	var response = {};
 
 	var response = await authService.getUserByLogin( login, app );
@@ -62,10 +62,11 @@ authController.prototype.register = async function(req, res, app) {
 		
 		var response = await authService.createUser( name , login, password, app );	
 
+		console.log( response );
+
 		if( response.success && response.success === true && response.metadata._id ){
 
 			response = await authService.authenticate( login, password, app );
-			console.log( response );
 
 		} else {
 
@@ -88,7 +89,8 @@ authController.prototype.logout = async function(req, res, app) {
 	let self = this;
 	let authService = ( new self.authService() );
 
-	var { token } = req.query;
+	var { token } = req.body;
+	consol.log( token );
 
 	var response = await authService.logout( token, app );
 

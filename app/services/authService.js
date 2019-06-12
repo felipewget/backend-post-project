@@ -157,7 +157,6 @@ authService.prototype.createUser = async function( name, login, password, app ) 
 		try {
 
 			var usersDAO 			= new app.app.models.usersDAO( conn );
-			var tokensUtil 			= new app.app.utils.tokensUtil;
 			var { formatName } 		= require("./../utils/namesUtil");
 
 			let obj_name = await formatName( name );
