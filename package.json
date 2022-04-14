@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@google-cloud/speech": "^2.0.0",
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "body-parser": "^1.15.2",
     "consign": "^0.1.2",
     "cookie-parser": "^1.4.3",
